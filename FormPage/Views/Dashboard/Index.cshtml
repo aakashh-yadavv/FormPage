@@ -1,0 +1,204 @@
+﻿@model FormPage.ViewModel.ShowDetails
+
+<div class="container mt-4">
+
+    <!-- 🎓 STUDENTS -->
+    <div class="table-card mb-5">
+
+        <div class="table-header">
+            <h3>🎓 Student List</h3>
+        </div>
+
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>School</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.Students)
+                    {
+                        <tr>
+                            <td>@item.StudentName</td>
+                            <td>@item.StudentAge</td>
+                            <td>@item.StudentAddress</td>
+                            <td>@item.SchoolName</td>
+
+                            <td>
+                                <!-- ✅ FIXED EDIT ROUTE -->
+                                <a asp-action="Index"
+                                       asp-route-editStudentId="@item.StudentID"
+                                       class="btn-action edit">
+                                    ✏ Edit
+                                </a>
+
+                                <form asp-action="DeleteStudent"
+                                      asp-route-id="@item.StudentID"
+                                      method="post"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn-action delete"
+                                            onclick="return confirm('Delete this record?')">
+                                        🗑 Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- 💼 EMPLOYEES -->
+    <div class="table-card">
+
+        <div class="table-header">
+            <h3>💼 Employee List</h3>
+        </div>
+
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Salary</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.Employees)
+                    {
+                        <tr>
+                            <td>@item.EmpName</td>
+                            <td>@item.EmpAge</td>
+                            <td>₹ @item.Salary</td>
+                            <td>@item.EmpAddress</td>
+
+                            <td>
+                                <!-- ✅ FIXED EMP ROUTE -->
+                                <a asp-action="Index"
+                                       asp-route-editEmpId="@item.EmpId"
+                                       class="btn-action edit">
+                                    ✏ Edit
+                                </a>
+
+                                <form asp-action="DeleteEmployee"
+                                      asp-route-id="@item.EmpId"
+                                      method="post"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn-action delete"
+                                            onclick="return confirm('Delete this record?')">
+                                        🗑 Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ✏ EDIT STUDENT FORM -->
+    @if (Model.EditStudent != null)
+    {
+        <div class="table-card mt-4">
+            <h4>✏ Edit Student</h4>
+
+            <form asp-action="EditStudent" method="post">
+                <input type="hidden" asp-for="EditStudent.StudentID" />
+
+                <input asp-for="EditStudent.StudentName" class="form-control mb-2" placeholder="Name" />
+                <input asp-for="EditStudent.StudentAge" class="form-control mb-2" placeholder="Age" />
+                <input asp-for="EditStudent.StudentAddress" class="form-control mb-2" placeholder="Address" />
+                <input asp-for="EditStudent.SchoolName" class="form-control mb-2" placeholder="School" />
+
+                <button type="submit" class="btn btn-success">Update Student</button>
+            </form>
+        </div>
+    }
+
+    <!-- ✏ EDIT EMPLOYEE FORM -->
+    @if (Model.EditEmployee != null)
+    {
+        <div class="table-card mt-4">
+            <h4>✏ Edit Employee</h4>
+
+            <form asp-action="EditEmployee" method="post">
+                <input type="hidden" asp-for="EditEmployee.EmpId" />
+
+                <input asp-for="EditEmployee.EmpName" class="form-control mb-2" placeholder="Name" />
+                <input asp-for="EditEmployee.EmpAge" class="form-control mb-2" placeholder="Age" />
+                <input asp-for="EditEmployee.Salary" class="form-control mb-2" placeholder="Salary" />
+                <input asp-for="EditEmployee.EmpAddress" class="form-control mb-2" placeholder="Address" />
+
+                <button type="submit" class="btn btn-success">Update Employee</button>
+            </form>
+        </div>
+    }
+
+</div>
+
+<style>
+
+    /* 📦 Card */
+    .table-card {
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* 🧾 Table */
+    .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: white;
+    }
+
+        .modern-table th,
+        .modern-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* hover */
+        .modern-table tbody tr:hover {
+            background: rgba(0,198,255,0.1);
+        }
+
+    /* 🎯 Buttons */
+    .btn-action {
+        padding: 5px 12px;
+        border-radius: 15px;
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+        margin-right: 5px;
+    }
+
+        .btn-action.edit {
+            background: linear-gradient(45deg,#ffc107,#ff9800);
+        }
+
+        .btn-action.delete {
+            background: linear-gradient(45deg,#ff4d4d,#ff0000);
+        }
+
+</style>

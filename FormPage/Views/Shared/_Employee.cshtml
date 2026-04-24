@@ -1,0 +1,35 @@
+﻿@model FormPage.Models.Employee
+
+<div class="modern-card">
+
+    <h4 class="mb-3">💼 Employee Form</h4>
+
+    <div class="input-group-animated">
+        <input asp-for="EmpName" required />
+        <label>Employee Name</label>
+        <span class="underline"></span>
+        <span asp-validation-for="EmpName" class="text-danger small"></span>
+    </div>
+
+    <div class="input-group-animated">
+        <input asp-for="EmpAge" required />
+        <label>Age</label>
+        <span class="underline"></span>
+        <span asp-validation-for="EmpAge" class="text-danger small"></span>
+    </div>
+
+    <div class="input-group-animated">
+        <input asp-for="Salary" required />
+        <label>Salary</label>
+        <span class="underline"></span>
+        <span asp-validation-for="Salary" class="text-danger small"></span>
+    </div>
+
+    <div class="input-group-animated">
+        <input asp-for="EmpAddress" required />
+        <label>Address</label>
+        <span class="underline"></span>
+        <span asp-validation-for="EmpAddress" class="text-danger small"></span>
+    </div>
+
+</div>

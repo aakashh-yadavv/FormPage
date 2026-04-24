@@ -1,0 +1,188 @@
+﻿@model FormPage.ViewModel.MainForm
+
+@{
+    ViewData["Title"] = "Main Form";
+}
+
+<div class="container mt-4">
+
+    <div class="glass p-4">
+
+        <h2 class="text-center mb-4">📝 Form Management</h2>
+
+        <form asp-action="Submit" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="row g-4">
+
+                <!-- 🎓 STUDENT -->
+                <div class="col-md-6">
+                    <div class="form-section">
+                        <h4>🎓 Student</h4>
+
+                        <div class="input-group-animated">
+                            <input asp-for="StudentForm.StudentName" required />
+                            <label>Student Name</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="StudentForm.StudentAge" required />
+                            <label>Student Age</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="StudentForm.StudentAddress" required />
+                            <label>Address</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="StudentForm.SchoolName" required />
+                            <label>School Name</label>
+                            <span class="underline"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 👨‍💼 EMPLOYEE -->
+                <div class="col-md-6">
+                    <div class="form-section">
+                        <h4>💼 Employee</h4>
+
+                        <div class="input-group-animated">
+                            <input asp-for="EmployeeForm.EmpName" required />
+                            <label>Employee Name</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="EmployeeForm.EmpAge" required />
+                            <label>Age</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="EmployeeForm.Salary" required />
+                            <label>Salary</label>
+                            <span class="underline"></span>
+                        </div>
+
+                        <div class="input-group-animated">
+                            <input asp-for="EmployeeForm.EmpAddress" required />
+                            <label>Address</label>
+                            <span class="underline"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 🚀 Submit -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn-submit">
+                    🚀 Submit Form
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<style>
+
+    /* 🧊 Glass */
+    .glass {
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* 📦 Section */
+    .form-section {
+        padding: 20px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.05);
+    }
+
+    /* INPUT GROUP */
+    .input-group-animated {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+        /* INPUT */
+        .input-group-animated input {
+            width: 100%;
+            padding: 10px 5px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* LABEL */
+        .input-group-animated label {
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            color: #aaa;
+            font-size: 14px;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        /* UNDERLINE */
+        .input-group-animated .underline {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(45deg,#00c6ff,#0072ff);
+            transition: 0.4s;
+        }
+
+        /* FOCUS EFFECT */
+        .input-group-animated input:focus ~ label,
+        .input-group-animated input:valid ~ label {
+            top: -12px;
+            font-size: 12px;
+            color: #00c6ff;
+        }
+
+        /* UNDERLINE ANIMATION */
+        .input-group-animated input:focus ~ .underline {
+            width: 100%;
+        }
+
+        /* GLOW EFFECT */
+        .input-group-animated input:focus {
+            box-shadow: 0 4px 15px rgba(0,198,255,0.3);
+        }
+
+    /* BUTTON */
+    .btn-submit {
+        background: linear-gradient(45deg,#00c6ff,#0072ff);
+        border: none;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 25px;
+        transition: 0.3s;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
